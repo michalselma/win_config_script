@@ -14,22 +14,6 @@ Function AdministratorRightsCheck($varScriptPath) {
 	PrintFunctionInfo "Script is run with Administrator rights. Continuing..."
 }
 
-# *** Restart computer without asking
-Function Restart {
-	Write-Output "Restarting..."
-	Restart-Computer
-}
-
-# *** Ask to restart computer 
-Function RestartAsk() {
-    $restartInput = Read-Host "Setup is done, restart is needed, input 'y' to restart computer now. (y/[N])"
-    if ((('y', 'Y', 'yes') -contains $restartInput)) {
-        Restart-Computer
-    } else {
-        WaitForKey
-    }
-}
-
 #########################
 # User Key interactions
 #########################
@@ -44,7 +28,6 @@ Function waitForKey {
 Function waitForENTER {
 	Read-Host "Press ENTER to continue..."
 }
-
 
 #########################
 # On-screen messages

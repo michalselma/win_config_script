@@ -7,11 +7,11 @@ $varScriptFunctFileName = "functions.psm1"
 $varAuxiliaryFileName = "auxiliary.psm1"
 $varLogFileName = Get-Date -Format FileDateTime
 $varAppxFileName = "appxpackages.psm1"
-$varAppxCfgFileName = "appxpackages.config"
+$varAppxCfgPath = "config\appxpackages.config"
 $varPowerOptFileName = "powersettings.psm1"
-$varPowerOptCfgFileName = "powersettings.config"
+$varPowerOptCfgPath = "config\powersettings.config"
 #$varTweaksFileName = "tweaks.psm1"
-#$varTweaksCfgFileName = "tweaks.config"
+#$varTweaksCfgPath = "config\tweaks.config"
 #$varTweaksModulesDirectory = "tweaks"
 
 #########################
@@ -56,23 +56,28 @@ AdministratorRightsCheck $varScriptPath
 PrintLog "AdministratorRightsCheck command Finished"
 
 PrintInfo "Running Power Config Set-up command..."
-$pwrcfgfile = "$varScriptDir\$varPowerOptCfgFileName"
+$pwrcfgfile = "$varScriptDir\$varPowerOptCfgPath"
 PowerSettings $pwrcfgfile
 PrintLog "PowerSettings command Finished"
 
 PrintInfo "Starting Microsoft Windows Appx Applications configuration..."
-$appxcfgfile = "$varScriptDir\$varAppxCfgFileName"
+$appxcfgfile = "$varScriptDir\$varAppxCfgPath"
 Applications $appxcfgfile
 PrintLog "Applications command Finished"
 
 #PrintInfo "Executing tweaks set-up..."
-#$tweakscfgfile = "$varScriptDir\$varTweaksCfgFileName"
+#$tweakscfgfile = "$varScriptDir\$varTweaksCfgPath"
 #Tweaks $tweakscfgfile
 #PrintLog "Tweaks command Finished"
 
-#PrintInfo "Starting Computer Rename..."
-#RenameComputerName
-#PrintLog "RenameComputerName command Finished"
+PrintInfo "Starting Computer Rename..."
+RenameComputerAsk
+PrintLog "RenameComputerAsk command Finished"
 
+PrintInfo "Restart required..."
 RestartAsk
+PrintLog "RestartAsk command Finished"
+
+waitForKey
+
 exit
