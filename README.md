@@ -1,3 +1,5 @@
+Windows Configuration Script
+
 Script functionality:
 - Automated set-up of Windows Power Config.
 - Automated installation/uninstallation of Windows Appx packages/applications.
